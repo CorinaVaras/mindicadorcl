@@ -1,11 +1,23 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import { Navigation } from './src/navigation/Navigation';
+
+
+const ColorTheme = {
+  ...DefaultTheme,
+  colors: {
+      ...DefaultTheme.colors,
+      background: 'white'
+  }
+};
 
 const App = () => {
   return (
-    <View>
-      <Text>Indicators</Text>
-    </View>
+    <NavigationContainer theme={ColorTheme}>
+       <Navigation/>
+    </NavigationContainer>
   )
 }
 
