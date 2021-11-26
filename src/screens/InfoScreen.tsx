@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
 import moment from 'moment'
 import indicatorclDB from '../api/IndicatorclDB';
-import {
-    LineChart
-} from "react-native-chart-kit";
+import Chart from '../componentes/Chart';
+
 
 export const InfoScreen = (props: any) => {
 
     const [values, setValues] = useState([]);
     const [dates, setDates] = useState([]);
+    const [loading, setLoading] = useState(false);
+
 
     const item = props.route.params.item;
     props.navigation.setOptions({ title: item.codigo });
 
-    const getIndicator = async () => {
+    const getChart = async () => {
+        setLoading(true)
         const response: any = await indicatorclDB.get(`/api/${item.codigo}`)
         const { data: { serie = {} } = {} } = response;
         const dates = serie.slice(0, 3).map(({ fecha }: any) => moment(fecha).format('L') ?? "");
@@ -22,10 +24,11 @@ export const InfoScreen = (props: any) => {
 
         setValues(values);
         setDates(dates);
+        setLoading(false)
     }
 
     useEffect(() => {
-        getIndicator()
+        getChart()
     }, [])
 
     return (
@@ -47,48 +50,20 @@ export const InfoScreen = (props: any) => {
                     <Text style={[styles.dataStyle, styles.textStyle]}>{item.unidad_medida}</Text>
                 </View>
             </View>
-            <View>
-                <LineChart
-                    data={{
-                        labels: dates,
-                        datasets: [
-                            {
-                                data: values,
-                                color: (opacity = 1) => `rgba(255, 255, 255, 1)`,
-                                strokeWidth: 1 // optional
-
-                            }
-                        ],
-
-                    }}
+            { 
+            loading ? (
+                <ActivityIndicator
                     style={{
-                        paddingTop: 30
-                      }}
-                    renderDotContent={({ x, y, index }) => {
-                        return (
-                            <Text
-                                key={x + y} style={{ position: 'absolute', top: y - 25, left: x -15, fontWeight: 'bold', borderRadius: 3, backgroundColor: '#accdf3' }}>{values[index]}
-                            </Text>
-                        );
-                    }}
-                    width={Dimensions.get("window").width}
-                    height={400}
-                    yAxisInterval={1} 
-                    chartConfig={{
-                        backgroundGradientFrom: "#1a7aff",
-                        backgroundGradientTo: "#1a7aff",
-                        color: (opacity = 1) => `rgba(1, 1, 1, 1)`,
-                        strokeWidth: 0.1, 
-                        propsForDots: {
-                            r: "1"
-                        }
-                    }}
-                    withDots={true}
-                    withInnerLines={false}
-                    withOuterLines={false}
-                    withShadow={false}
+                        position: 'absolute',
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        left: 0}}
+                    color={'#1a7aff'}
                 />
-            </View>
+            ) :  <Chart values={values} dates={dates}/>
+            }
+           
         </>
     )
 }
