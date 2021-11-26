@@ -53,7 +53,20 @@ export const Navigation = () => {
           )
       }}
       />
-      <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Screen 
+        name="Detail" 
+        component={DetailScreen}
+        
+        options={{
+          // ...titleConfiguration,
+          headerStyle: {
+            backgroundColor: "#f1f3f4",
+        
+          },
+          headerTitleAlign: 'center',
+          headerTitle: 'gergg'
+        }}
+      />
     </Stack.Navigator>
   );
 }
