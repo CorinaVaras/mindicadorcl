@@ -8,8 +8,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export type RootStackParams = {
   Home: undefined;
-  Detail: any;
-  Info: any;
+  Detail: undefined;
+  Info: undefined;
 }
 
 const titleConfiguration = {

@@ -5,21 +5,21 @@ import indicatorclDB from '../api/IndicatorclDB';
 import Chart from '../componentes/Chart';
 import Loading from '../componentes/Loading';
 import styles from './styles/info';
-import { screenProps } from '../interfaces/interfaces';
+import { StackScreenProps } from '@react-navigation/stack';
 
-export const InfoScreen = (props: screenProps) => {
+interface Props extends StackScreenProps<any,any>{ 
+    route: any
+};
 
-    console.log('info screen', JSON.stringify(props));
-    
+export const InfoScreen = ({navigation, route}: Props) => {
 
     const [values, setValues] = useState([]);
     const [dates, setDates] = useState([]);
     const [loading, setLoading] = useState(false);
 
-
-    const item = props.route.params.item;
-    props.navigation.setOptions({ title: item.codigo });
-
+    const item = route.params.item;
+    navigation.setOptions({ title: item.codigo });
+    
     const getChart = async () => {
         setLoading(true)
         const response: any = await indicatorclDB.get(`/api/${item.codigo}`)

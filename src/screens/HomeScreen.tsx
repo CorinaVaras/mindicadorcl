@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { ListItem, Icon } from "react-native-elements";
+import { StackScreenProps } from '@react-navigation/stack';
 import { ScrollView } from 'react-native';
 import indicatorclDB from '../api/IndicatorclDB';
 import styles from './styles/home'
-import  { Navigation, IndicatorsItem } from '../interfaces/interfaces'
+import  { IndicatorsItem } from '../interfaces/interfaces'
 
+interface Props extends StackScreenProps<any,any>{};
 
-export const HomeScreen = ({ navigation }: Navigation) => {
+export const HomeScreen = ({ navigation }: Props) => {
 
     const [dataIndicators, setData] = useState([]);
 
@@ -23,7 +25,6 @@ export const HomeScreen = ({ navigation }: Navigation) => {
     useEffect(() => {
         getIndicator()
     }, [])
-
 
     return (
         <ScrollView>
