@@ -2,16 +2,17 @@ import React, { useEffect, useState} from 'react'
 import { ScrollView } from 'react-native'
 import { ListItem } from "react-native-elements";
 import moment from 'moment'
+import { StackScreenProps } from '@react-navigation/stack';
 import indicatorclDB from '../api/IndicatorclDB';
 import Loading from '../componentes/Loading';
 import styles from './styles/detail';
-import { screenProps } from '../interfaces/interfaces';
 
+interface Props extends StackScreenProps<any,any>{ 
+    route: any
+};
 
-export const DetailScreen = (props: screenProps) => {  
-    console.log(JSON.stringify(props));
-    
-
+export const DetailScreen = (props: Props) => {  
+   
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
     const item = props.route.params.item;
