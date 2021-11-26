@@ -8,12 +8,13 @@ export const DetailScreen = (props: any) => {
 
     const data = props.route.params;
   
+    props.navigation.setOptions({title: 'find'});
    
     return (
         <ScrollView>
             {
                 data &&
-                data.map((item, i) => (
+                data.map((item: any, i: any) => (
                     <ListItem key={i} bottomDivider>
                         <ListItem.Content style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
                         <ListItem.Title style={{color:'#2B90F7'}}>{moment(item.fecha).format('L')}</ListItem.Title>

@@ -58,28 +58,24 @@ export const Navigation = () => {
       <Stack.Screen 
         name="Detail" 
         component={DetailScreen}
-        
         options={{
-          // ...titleConfiguration,
+          title: 'Default',
           headerStyle: {
             backgroundColor: "#f1f3f4",
-        
           },
           headerTitleAlign: 'center',
-          headerTitle: 'pasar arg por parametros'
         }}
       />
       <Stack.Screen 
         name="Info" 
         component={InfoScreen}
         options={{
-          // ...titleConfiguration,
+          title: 'Default',
           headerStyle: {
             backgroundColor: "#f1f3f4",
         
           },
-          headerTitleAlign: 'center',
-          headerTitle: 'deuda tecnnica'
+          headerTitleAlign: 'center'
         }}
       />
     </Stack.Navigator>

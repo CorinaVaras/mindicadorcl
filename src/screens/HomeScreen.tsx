@@ -25,13 +25,13 @@ export const HomeScreen = (props: any) => {
         <ScrollView>
             {
                 dataIndicators &&
-                dataIndicators.map((item, i) => (
+                dataIndicators.map((item: any, i: any) => (
                     <ListItem key={i} bottomDivider>
                         <ListItem.Content>
-                        <ListItem.Title onPress={() => navigation.navigate('Detail', dataIndicators)} >{item.codigo}</ListItem.Title>
+                        <ListItem.Title onPress={() => navigation.navigate('Detail', dataIndicators, item)} >{item.codigo}</ListItem.Title>
                         <ListItem.Subtitle style={{color:'#2B90F7'}}>{item.unidad_medida}</ListItem.Subtitle>
                         </ListItem.Content>
-                        <Icon name={'info-outline'} color={'#2B90F7'} onPress={() => navigation.navigate('Info', dataIndicators)} />
+                        <Icon name={'info-outline'} color={'#2B90F7'} onPress={() => navigation.navigate('Info', {dataIndicators, item})} />
                         <ListItem.Chevron  size={24} />
                     </ListItem>
                 ))
