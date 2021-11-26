@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text } from 'react-native'
 import moment from 'moment'
 import indicatorclDB from '../api/IndicatorclDB';
 import Chart from '../componentes/Chart';
+import Loading from '../componentes/Loading';
+import styles from './styles/info';
+import { screenProps } from '../interfaces/interfaces';
 
+export const InfoScreen = (props: screenProps) => {
 
-export const InfoScreen = (props: any) => {
+    console.log('info screen', JSON.stringify(props));
+    
 
     const [values, setValues] = useState([]);
     const [dates, setDates] = useState([]);
@@ -52,49 +57,10 @@ export const InfoScreen = (props: any) => {
             </View>
             { 
             loading ? (
-                <ActivityIndicator
-                    style={{
-                        position: 'absolute',
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        left: 0}}
-                    color={'#1a7aff'}
-                />
+                <Loading/>
             ) :  <Chart values={values} dates={dates}/>
             }
            
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    valor: {
-        fontSize: 30,
-        fontWeight: '500',
-        color: '#115ca6',
-        textAlign: 'center',
-        width: '100%',
-        marginVertical: 15
-    },
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        height: 30,
-        alignItems: 'center',
-        marginBottom: 10,
-        marginRight: '20%',
-        marginLeft: '10%'
-    },
-    dataStyle: {
-        padding: 4,
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 6,
-        width: '40%',
-        textAlign: "right"
-    },
-    textStyle: {
-        color: 'black'
-    }
-})

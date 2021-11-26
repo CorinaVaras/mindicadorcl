@@ -4,10 +4,10 @@ import { Text, Dimensions } from 'react-native'
 import {
     LineChart
 } from "react-native-chart-kit";
+import { ChartData } from '../interfaces/interfaces';
 
 
-const Chart = (props:any) => {
-    console.log('props chart', JSON.stringify(props));
+const Chart = (props:ChartData) => {
     
     return (
         <>
