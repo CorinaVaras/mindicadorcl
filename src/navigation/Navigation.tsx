@@ -2,12 +2,14 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/HomeScreen';
 import { DetailScreen } from '../screens/DetailScreen';
+import { InfoScreen } from '../screens/InfoScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 export type RootStackParams = {
   Home: undefined;
   Detail: any;
+  Info: any;
 }
 
 const titleConfiguration = {
@@ -64,7 +66,20 @@ export const Navigation = () => {
         
           },
           headerTitleAlign: 'center',
-          headerTitle: 'gergg'
+          headerTitle: 'pasar arg por parametros'
+        }}
+      />
+      <Stack.Screen 
+        name="Info" 
+        component={InfoScreen}
+        options={{
+          // ...titleConfiguration,
+          headerStyle: {
+            backgroundColor: "#f1f3f4",
+        
+          },
+          headerTitleAlign: 'center',
+          headerTitle: 'deuda tecnnica'
         }}
       />
     </Stack.Navigator>
